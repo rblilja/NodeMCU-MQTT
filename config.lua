@@ -19,7 +19,6 @@ module.MQTT.host = "X.X.X.X"
 module.MQTT.port = 1883
 module.MQTT.client_id = node.chipid()
 module.MQTT.keepalive = 120
-module.MQTT.endpoint = "nodemcu/"
 module.MQTT.user = "XXX" 
 module.MQTT.pwd = "XXX"
 module.MQTT.timeout = 5
