@@ -17,13 +17,17 @@ function sample()
 	if wireless.is_ready() == true and mqttd.is_ready() == true then
 		
 		rh, t = am2320.read()
+
+		sec, usec, rate = rtctime.get()
 		
 		rh = rh / 10
 		t = t / 10
 		
-		print("\n\tAM2320 - SAMPLED".."\n\t\Temperature: "..string.format("%s degrees C", t).."\n\t\RH: "..string.format("%s%%", rh))
+		--print("\n\tAM2320 - SAMPLED".."\n\t\Temperature: "..string.format("%s degrees C", t).."\n\t\RH: "..string.format("%s%%", rh))
 
-		payload = "{ \"temp\":"..(t)..", \"RH\":"..(rh).." }"
+		payload = "{ \"temp\":"..(t)..", \"RH\":"..(rh)..", \"epoch\":"..sec.." }"
+		
+		print("\n\tMQTT Payload: "..payload)
 		
 		mqttd.publish("nodemcu/am2320", payload)
 	else
